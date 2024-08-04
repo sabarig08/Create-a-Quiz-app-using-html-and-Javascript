@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz App</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="container">
+        <div class="quiz-slide active" id="quiz1">
+            <h2>1.Which of the following colors contain equal amounts of RBG? </h2>
+            <ol>
+                <li> <button class="answer ans1" onclick="checkAnswer(this, 'wrong', 1)">White</button></li>
+                <li><button class="answer ans2" onclick="checkAnswer(this, 'wrong', 1)">Grey</button></li>
+                <li> <button class="answer ans3" onclick="checkAnswer(this, 'wrong', 1)">Black</button></li>
+                <li><button class="answer ans4" onclick="checkAnswer(this, 'correct', 1)"> All The Above </button></li>
+            </ol>
+        </div>
+        <div class="quiz-slide" id="quiz2">
+            <h2>2.What is the correct syntax to write an HTML comment?</h2>
+            <ol>
+                <li><button class="answer ans1" onclick="checkAnswer(this, 'correct', 2)"> !--Comment--</button></li>
+                <li><button class="answer ans2" onclick="checkAnswer(this, 'wrong', 2)">#Comment</button></li>
+                <li><button class="answer ans3" onclick="checkAnswer(this, 'wrong', 2)">//Comment</button></li>
+                <li><button class="answer ans4" onclick="checkAnswer(this, 'wrong', 2)">/*Comment*/</button></li>
+            </ol>
+        </div>
+        <div class="quiz-slide" id="quiz3">
+            <h2>3.What is the smallest header in HTML by default?</h2>
+            <ol>
+                <li><button class="answer ans1" onclick="checkAnswer(this, 'wrong', 3)">h1</button></li>
+                <li><button class="answer ans2" onclick="checkAnswer(this, 'wrong', 3)">h3</button></li>
+                <li><button class="answer ans3" onclick="checkAnswer(this, 'correct', 3)">h6</button></li>
+                <li> <button class="answer ans4" onclick="checkAnswer(this, 'wrong', 3)">h4</button></li>
+            </ol>
+        </div>
+        <div class="quiz-slide" id="quiz4">
+            <h2>4.What tag is used to render an image on a webpage?<h2>
+                    <ol>
+                        <li> <button class="answer ans1" onclick="checkAnswer(this, 'correct', 4)"> img </button></li>
+                        <li> <button class="answer ans2" onclick="checkAnswer(this, 'wrong', 4)"> src</button></li>
+                        <li> <button class="answer ans3" onclick="checkAnswer(this, 'wrong', 4)">image </button></li>
+                        <li> <button class="answer ans4" onclick="checkAnswer(this, 'wrong', 4)">None of the above
+                            </button></li>
+                    </ol>
+        </div>
+        <div class="quiz-slide" id="quiz5">
+            <h2>5.Which of the following properties is used to change the font of text?</h2>
+            <ol>
+                <li> <button class="answer ans1" onclick="checkAnswer(this, 'wrong', 5)"> font-size</button></li>
+                <li> <button class="answer ans2" onclick="checkAnswer(this, 'correct', 5)">font-family</button></li>
+                <li> <button class="answer ans3" onclick="checkAnswer(this, 'wrong', 5)">font-radius</button></li>
+                <li> <button class="answer ans4" onclick="checkAnswer(this, 'wrong', 5)">None of the above</button></li>
+            </ol>
+        </div>
+        <button class="next" onclick="goToNextQuestion()">Next</button>
+    </div>
+
+    <script>
+        let curntQz = 1;
+
+        function rstColor(questionNum) {
+            const buttons = document.querySelectorAll(`#quiz${questionNum} .answer`);
+            buttons.forEach(button => {
+                button.style.backgroundColor = '';
+            });
+        }
+
+        function checkAnswer(button, status, questionNum) {
+            rstColor(questionNum);
+
+            if (status === 'correct') {
+                button.style.backgroundColor = 'green';
+            } else {
+                button.style.backgroundColor = 'red';
+            }
+            const nxtBtn = document.querySelector('.next');
+            nxtBtn.classList.add('show');
+        }
+
+        function goToNextQuestion() {
+            const curntSlide = document.getElementById(`quiz${curntQz}`);
+            curntSlide.classList.remove('active');
+
+            curntQz++;
+            const nxtSlide = document.getElementById(`quiz${curntQz}`);
+            if (nxtSlide) {
+                nxtSlide.classList.add('active');
+                document.querySelector('.next').classList.remove('show');
+            } else {
+                alert("Quiz Finished");
+            }
+        }
+
+    </script>
+</body>
+
+</html>
